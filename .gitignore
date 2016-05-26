@@ -1,6 +1,9 @@
 # yii console command
 /yii
 
+# site sources
+/frontend/web/source
+
 # phpstorm project files
 .idea
 
