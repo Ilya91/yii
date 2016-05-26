@@ -12,8 +12,8 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers',
-
+    'controllerNamespace' => 'frontend\controllers', //нужен для работы автолоудинга
+    'defaultRoute' => 'main',
     'modules' => [
         'main' => [
             'class' => 'app\modules\main\Module',
@@ -25,6 +25,28 @@ return [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
         ],
+
+        'mail' => [
+            'class'            => 'zyx\phpmailer\Mailer',
+            'viewPath'         => '@common/mail',
+            'useFileTransport' => false,
+            'config'           => [
+                'mailer'     => 'smtp',
+                'host'       => 'smtp.yandex.ru',
+                'port'       => '465',
+                'smtpsecure' => 'ssl',
+                'smtpauth'   => true,
+                'username'   => 'yii2.school@yandex.ru',
+                'password'   => '540320',
+                'ishtml' => true,
+                'charset' => 'UTF-8',
+            ],
+        ],
+
+        'common' => [
+            'class' => 'frontend\components\Common',
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -37,14 +59,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+/*            'rules'=>[
+               ''=>'main/main',
+            ],*/
         ],
-        */
+
     ],
     'params' => $params,
 ];

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace frontend\controllers;
 
 class MainController extends \yii\web\Controller
 {
@@ -8,5 +8,6 @@ class MainController extends \yii\web\Controller
     {
         return $this->render('index');
     }
+
 
 }

@@ -21,14 +21,24 @@ $this->beginPage();
 <?
 $this->beginBody();
 ?>
-
+<?php
+if(Yii::$app->session->hasFlash('success')){
+    $success =  Yii::$app->session->getFlash('success');
+    echo \yii\bootstrap\Alert::widget([
+       'options' =>[
+           'class' => 'alert-info'
+       ],
+        'body' => $success
+    ]);
+}
+?>
 <!-- Header Starts -->
 <? echo $this->render("//common/head") ?>
 <!-- #Header Starts -->
 
 <div class="inside-banner">
     <div class="container">
-        <span class="pull-right"><a href="#">Home</a> / <?=$this->title ?></span>
+        <span class="pull-right"><a href="/">Home</a> / <?=$this->title ?></span>
         <h2><?=$this->title ?></h2>
     </div>
 </div>

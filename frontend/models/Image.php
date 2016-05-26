@@ -9,7 +9,11 @@
 namespace frontend\models;
 
 
-class Image
-{
+use yii\base\Model;
 
+class Image extends Model
+{
+    public static function getImageUrl(){
+        return 'image.png';
+    }
 }

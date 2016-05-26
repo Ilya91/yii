@@ -34,7 +34,7 @@ class MainAsset extends  AssetBundle{
     ];
 
     public $jsOptions = [
-        'position' =>  View::POS_HEAD,
+        'position' =>  View::POS_HEAD, //указывается место, где будут подключаться скрипты на странице, по умолчанию они подключаются внизу
     ];
 
 
