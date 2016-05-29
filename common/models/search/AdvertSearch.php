@@ -18,8 +18,8 @@ class AdvertSearch extends Advert
     public function rules()
     {
         return [
-            [['idadvert', 'price', 'agent', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'recommend', 'created_at', 'updated_at'], 'integer'],
-            [['address', 'general_image', 'description', 'advertcol', 'location', 'type'], 'safe'],
+            [['idadvert', 'price', 'fk_agent', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'recommend', 'created_at', 'updated_at'], 'integer'],
+            [['address', 'general_image', 'description', 'location', 'type'], 'safe'],
         ];
     }
 
@@ -43,8 +43,6 @@ class AdvertSearch extends Advert
     {
         $query = Advert::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,11 +55,10 @@ class AdvertSearch extends Advert
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'idadvert' => $this->idadvert,
             'price' => $this->price,
-            'agent' => $this->agent,
+            'fk_agent' => $this->fk_agent,
             'bedroom' => $this->bedroom,
             'livingroom' => $this->livingroom,
             'parking' => $this->parking,
@@ -76,7 +73,6 @@ class AdvertSearch extends Advert
         $query->andFilterWhere(['like', 'address', $this->address])
             ->andFilterWhere(['like', 'general_image', $this->general_image])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'advertcol', $this->advertcol])
             ->andFilterWhere(['like', 'location', $this->location])
             ->andFilterWhere(['like', 'type', $this->type]);
 

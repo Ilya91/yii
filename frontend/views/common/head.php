@@ -1,3 +1,6 @@
+<?
+use yii\bootstrap\Nav;
+?>
 <!-- Header Starts -->
 <div class="navbar-wrapper">
 
@@ -18,15 +21,18 @@
 
             <!-- Nav Starts -->
             <div class="navbar-collapse  collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/main" >Home</a></li>
-                    <li><a href="/main/main/about" >About</a></li>
-                    <li><a href="/main/main/agents" >Agents</a></li>
-                    <li><a href="/main/blog" >Blog</a></li>
-                    <li><a href="/main/main/contact" >Contact</a></li>
-                    <li><a href="/main/main/register" >Registration</a></li>
-                    <li><a href="/main/main/login" >Login</a></li>
-                </ul>
+                <?
+                $menuItems = [
+                    ['label' => 'Home', 'url' => ''],
+                    ['label' => 'About', 'url' => 'main/main/about'],
+                    ['label' => 'Agents', 'url' => 'main/main/agents'],
+                    ['label' => 'Admin', 'url' => 'cabinet/advert'],
+                ];
+                echo Nav::widget([
+                    'options' => ['class' => 'navbar-nav navbar-right'],
+                    'items' => $menuItems,
+                ]);
+                ?>
             </div>
             <!-- #Nav Ends -->
 
@@ -46,11 +52,17 @@
     <div class="header">
         <a href="/main" ><img src="/images/logo.png"  alt="Realestate"></a>
 
-        <ul class="pull-right">
-            <li><a href="buysalerent.html" >Buy</a></li>
-            <li><a href="buysalerent.html" >Sale</a></li>
-            <li><a href="buysalerent.html" >Rent</a></li>
-        </ul>
+        <?
+        $menuItems = [
+            ['label' => 'Buy', 'url' => '#'],
+            ['label' => 'Sale', 'url' => '#'],
+            ['label' => 'Rent', 'url' => '#'],
+        ];
+        echo Nav::widget([
+            'options' => ['class' => 'pull-right'],
+            'items' => $menuItems,
+        ]);
+        ?>
     </div>
     <!-- #Header Starts -->
 </div>

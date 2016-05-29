@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "advert".
@@ -10,14 +11,13 @@ use Yii;
  * @property integer $idadvert
  * @property integer $price
  * @property string $address
- * @property integer $agent
+ * @property integer $fk_agent_detail
  * @property integer $bedroom
  * @property integer $livingroom
  * @property integer $parking
  * @property integer $kitchen
  * @property string $general_image
  * @property string $description
- * @property string $advertcol
  * @property string $location
  * @property integer $hot
  * @property integer $sold
@@ -36,20 +36,32 @@ class Advert extends \yii\db\ActiveRecord
         return 'advert';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    public function scenarios(){
+        $scenarios = parent::scenarios();
+        $scenarios['step2'] = ['general_image'];
+
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['price', 'agent', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'recommend', 'created_at', 'updated_at'], 'integer'],
+            [['price'], 'required'],
+            [['price', 'fk_agent', 'bedroom', 'livingroom', 'parking', 'kitchen', 'hot', 'sold', 'type', 'recommend'], 'integer'],
             [['description'], 'string'],
-            [['created_at', 'updated_at'], 'required'],
             [['address'], 'string', 'max' => 255],
-            [['general_image'], 'string', 'max' => 200],
-            [['advertcol'], 'string', 'max' => 45],
-            [['location'], 'string', 'max' => 20],
-            [['type'], 'string', 'max' => 50],
+            [['location'], 'string', 'max' => 50],
+            //['general_image', 'file', 'extensions' => ['jpg','png','gif']]
         ];
     }
 
@@ -62,14 +74,13 @@ class Advert extends \yii\db\ActiveRecord
             'idadvert' => 'Idadvert',
             'price' => 'Price',
             'address' => 'Address',
-            'agent' => 'Agent',
+            'fk_agent' => 'Fk Agent Detail',
             'bedroom' => 'Bedroom',
             'livingroom' => 'Livingroom',
             'parking' => 'Parking',
             'kitchen' => 'Kitchen',
             'general_image' => 'General Image',
             'description' => 'Description',
-            'advertcol' => 'Advertcol',
             'location' => 'Location',
             'hot' => 'Hot',
             'sold' => 'Sold',
@@ -79,6 +90,25 @@ class Advert extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getUser(){
+        return $this->hasOne(User::className(),['id' => 'fk_agent']);
+    }
+
+    //beforeValidate
+    //afterValidate
+    //beforeSave
+    //afterSave
+    //beforeFind
+    //afterFind
+
+    public function afterValidate(){
+        $this->fk_agent = Yii::$app->user->identity->id;
+    }
+
+    /*public function afterSave(){
+        Yii::$app->locator->cache->set('id',$this->idadvert);
+    }*/
 
     /**
      * @inheritdoc

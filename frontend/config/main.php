@@ -28,6 +28,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => '/main/main/login'
         ],
 
         'mail' => [

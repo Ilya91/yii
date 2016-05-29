@@ -12,12 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="advert-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a('Create Advert', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,14 +27,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'idadvert',
             'price',
             'address',
-            'agent',
+            'fk_agent',
             'bedroom',
-            // 'livingroom',
-            // 'parking',
-            // 'kitchen',
-            // 'general_image',
+             'livingroom',
+             'parking',
+             'kitchen',
+             'general_image',
             // 'description:ntext',
-            // 'advertcol',
             // 'location',
             // 'hot',
             // 'sold',
@@ -46,4 +45,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+
 </div>

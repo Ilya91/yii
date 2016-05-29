@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address') ?>
 
-    <?= $form->field($model, 'agent') ?>
+    <?= $form->field($model, 'fk_agent') ?>
 
     <?= $form->field($model, 'bedroom') ?>
 
@@ -34,8 +34,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'general_image') ?>
 
     <?php // echo $form->field($model, 'description') ?>
-
-    <?php // echo $form->field($model, 'advertcol') ?>
 
     <?php // echo $form->field($model, 'location') ?>
 
